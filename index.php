@@ -25,14 +25,23 @@ $update = json_decode(file_get_contents('php://input'));
 
 //your app
 try {
+    
+    if(date('h')== 12)
+    {
+        $response = $client->sendMessage([
+        	'chat_id' => $update->message->chat->id,
+        	'text' => "yo quese"
+     	]);
+        
+    }
 
-    if($update->message->text == '/fecha')
+    else if($update->message->text == '/fecha')
     {
         
     	$response = $client->sendChatAction(['chat_id' => $update->message->chat->id, 'action' => 'typing']);
     	$response = $client->sendMessage([
         	'chat_id' => $update->message->chat->id,
-        	'text' => date('l jS \of F Y h:i:s A')
+        	'text' => date('l jS \of F Y')
      	]);
     }
     else if($update->message->text == '/help')
