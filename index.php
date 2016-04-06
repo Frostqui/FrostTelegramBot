@@ -18,6 +18,7 @@
 *
 */
 require 'vendor/autoload.php';
+require_once 'WeatherForecast.class.php';
 
 $client = new Zelenin\Telegram\Bot\Api('195259989:AAEZp0NbqwDRnsS03T1_cDxf7e7e0nRcEto'); // Set your access token
 $url = ''; // URL RSS feed
@@ -26,14 +27,9 @@ $update = json_decode(file_get_contents('php://input'));
 //your app
 try {
     
-    if(date('h')== 12)
-    {
-       
     
-        
-    }
 
-    else if($update->message->text == '/fecha')
+ if($update->message->text == '/fecha')
     {
         
     	$response = $client->sendChatAction(['chat_id' => $update->message->chat->id, 'action' => 'typing']);
@@ -42,21 +38,25 @@ try {
         	'text' => date('l jS \of F Y')
      	]);
     }
-    else if($update->message->text == '/email')
+    else if($update->message->text == '/tiempo')
     {
-        $mail = "Prueba de mensaje";
-        //Titulo
-        $titulo = "PRUEBA DE TITULO";
-        //cabecera
-        $headers = "MIME-Version: 1.0\r\n"; 
-        $headers .= "Content-type: text/html; charset=iso-8859-1\r\n"; 
-        //dirección del remitente 
-        $headers .= "From: Frost < diego.lopezgarcia@hotmail.com >\r\n";
-        //Enviamos el mensaje a tu_dirección_email 
-        $bool = mail("diego.lopezgarcia@hotmail.com",$titulo,$mail,$headers);
+       $weather = new WeatherForecast('3b23b02397364b97a3b153007160604');
+
+        // Defines the name of the city, the country and the number of days of forecast (between 1 and 5)
+        $weather->setRequest('New York', 'United States Of America', 5);
+        
+        // Defines the US unit of measurement
+        $weather->setUSMetric(true);
         
         
     		
+        
+        $response = $client->sendChatAction(['chat_id' => $update->message->chat->id, 'action' => 'typing']);
+    	$response = $client->sendMessage([
+    		'chat_id' => $update->message->chat->id,
+    		'text' => $response->weather_now['weatherDesc']
+    		]);
+
 
     }
     
