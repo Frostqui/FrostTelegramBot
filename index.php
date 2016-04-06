@@ -49,8 +49,10 @@ try {
         $weather->setUSMetric(true);
         
         
-    		
+        echo $response->weather_now['weatherDesc']
         
+        $response = $weather->getLocalWeather();
+            
         $response = $client->sendChatAction(['chat_id' => $update->message->chat->id, 'action' => 'typing']);
     	$response = $client->sendMessage([
     		'chat_id' => $update->message->chat->id,
