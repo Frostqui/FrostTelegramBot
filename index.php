@@ -26,12 +26,13 @@ $update = json_decode(file_get_contents('php://input'));
 //your app
 try {
 
-    if($update->message->text == '/email')
+    if($update->message->text == '/fecha')
     {
+        
     	$response = $client->sendChatAction(['chat_id' => $update->message->chat->id, 'action' => 'typing']);
     	$response = $client->sendMessage([
         	'chat_id' => $update->message->chat->id,
-        	'text' => "You can send email to : Kasra@madadipouya.com"
+        	'text' => date('l jS \of F Y h:i:s A')
      	]);
     }
     else if($update->message->text == '/help')
