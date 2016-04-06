@@ -56,7 +56,12 @@ try {
         $response = $client->sendChatAction(['chat_id' => $update->message->chat->id, 'action' => 'typing']);
     	$response = $client->sendMessage([
     		'chat_id' => $update->message->chat->id,
-    		'text' => $response->weather_now['weatherDesc']
+             if ($weather::$has_response){
+                 'text' => $response->weather_now['weatherDesc']
+             }esle{
+                 'text' => "No he pillado que tiempo hace sorry"
+             }
+    		
     		]);
 
 
