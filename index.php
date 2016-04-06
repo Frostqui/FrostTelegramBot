@@ -49,7 +49,7 @@ try {
         $weather->setUSMetric(true);
         
         
-        echo $response->weather_now['weatherDesc']
+        
         
         $response = $weather->getLocalWeather();
             
