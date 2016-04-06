@@ -28,10 +28,8 @@ try {
     
     if(date('h')== 12)
     {
-        $response = $client->sendMessage([
-        	'chat_id' => $update->message->chat->id,
-        	'text' => "yo quese"
-     	]);
+       
+    
         
     }
 
@@ -44,7 +42,25 @@ try {
         	'text' => date('l jS \of F Y')
      	]);
     }
-    else if($update->message->text == '/help')
+    else if($update->message->text == '/email')
+    {
+        $mail = "Prueba de mensaje";
+        //Titulo
+        $titulo = "PRUEBA DE TITULO";
+        //cabecera
+        $headers = "MIME-Version: 1.0\r\n"; 
+        $headers .= "Content-type: text/html; charset=iso-8859-1\r\n"; 
+        //dirección del remitente 
+        $headers .= "From: Frost < diego.lopezgarcia@hotmail.com >\r\n";
+        //Enviamos el mensaje a tu_dirección_email 
+        $bool = mail("diego.lopezgarcia@hotmail.com",$titulo,$mail,$headers);
+        
+        
+    		
+
+    }
+    
+     else if($update->message->text == '/help')
     {
     	$response = $client->sendChatAction(['chat_id' => $update->message->chat->id, 'action' => 'typing']);
     	$response = $client->sendMessage([
@@ -54,6 +70,7 @@ try {
     		]);
 
     }
+    
     else if($update->message->text == '/insulto')
     {
     $strings = array(
