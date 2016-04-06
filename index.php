@@ -54,20 +54,31 @@ try {
     		]);
 
     }
-    else if($update->message->text == '/latest')
+    else if($update->message->text == '/insulto')
     {
-        $city="Illescas";
-        $country="ES"; //Two digit country code
-        $url="http://api.openweathermap.org/data/2.5/weather?q=".$city.",".$country."&units=metric&cnt=7&lang=en";
-        $json=file_get_contents($url);
-        $data=json_decode($json,true);
+    $strings = array(
+    'Gilipollas',
+    'Comemierda',
+    'Payaso',
+    'Subnormal',
+        'Tonto de los cojones',
+    'Mendrugo',
+        'Cansalmas',
+    'Imbecil',
+        'Tontopolla',
+    'Vete a la mierda cabrom',
+        'Capullo',
+    'Tontaco',
+        
+    );
+        $key = array_rand($strings);
 
 
         
     	$response = $client->sendChatAction(['chat_id' => $update->message->chat->id, 'action' => 'typing']);
     	$response = $client->sendMessage([
         	'chat_id' => $update->message->chat->id,
-        	'text' => $data['main']['temp']
+        	'text' => $strings[$key]
      	]);
 
     }

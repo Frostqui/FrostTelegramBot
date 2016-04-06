@@ -11,7 +11,7 @@ Bot de uso personal para telegram de frost. El bot cuenta con varios comandos di
 	
 - ````/help```` Lista de los comandos disponibles.
 - ````/fecha```` Te muestra la fecha.
-
+- ````/insulto```` Te insulta.
 
 ##Dependencies
 The program works out the box so smoothly and all necessary dependencies have been already added to the project.
@@ -19,7 +19,7 @@ You just need to run it in your server. It is highly recommended to run "compose
 
 
 
-## Contact
+## Contacto
 * diego.lopezgarcia@hotmail.com
 * Twitter: @DiegoLopGr
 
