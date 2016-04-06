@@ -47,19 +47,19 @@ try {
     }
     else if($update->message->text == '/latest')
     {
-    		Feed::$cacheDir 	= __DIR__ . '/cache';
-			Feed::$cacheExpire 	= '5 hours';
-			$rss 		= Feed::loadRss($url);
-			$items 		= $rss->item;
-			$lastitem 	= $items[0];
-			$lastlink 	= $lastitem->link;
-			$lasttitle 	= $lastitem->title;
-			$message = $lasttitle . " \n ". $lastlink;
-			$response = $client->sendChatAction(['chat_id' => $update->message->chat->id, 'action' => 'typing']);
-			$response = $client->sendMessage([
-					'chat_id' => $update->message->chat->id,
-					'text' => $message
-				]);
+        $city="Illescas";
+        $country="ES"; //Two digit country code
+        $url="http://api.openweathermap.org/data/2.5/weather?q=".$city.",".$country."&units=metric&cnt=7&lang=en";
+        $json=file_get_contents($url);
+        $data=json_decode($json,true);
+
+
+        
+    	$response = $client->sendChatAction(['chat_id' => $update->message->chat->id, 'action' => 'typing']);
+    	$response = $client->sendMessage([
+        	'chat_id' => $update->message->chat->id,
+        	'text' => $data['main']['temp']
+     	]);
 
     }
     else
